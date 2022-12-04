@@ -1,0 +1,82 @@
+
+
+    <% layout('layouts/boielerplate') %> 
+
+
+ 
+ <div class="row">
+        <h1 class="text-center">Edit This Campground</h1>
+        <div class="col-6 offset-3">
+    
+            
+              
+                <form action="/campground/<%=cedit._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                    <div class = 'mb-3'>
+                        <label class="form-label" for="tittle">Tittle:</label>
+                        <input class="form-control" type="text" id="tittle" name="carray[tittle]" value="<%= cedit.tittle %>" required>
+                        <div class="valid-feedback">
+                            Looks Good!
+                        </div>
+                    </div>
+            
+                   <div class = 'mb-3'>
+                        <label class="form-label" for="location">Location:</label>
+                        <input class="form-control" type="text" id="location" name="carray[location]" value="<%= cedit.location %>" required>
+                    </div>
+    
+                  
+    
+                    <div class = 'mb-3'>
+                        <label class="form-label" for="price">Campground Price:</label>
+                        <div class="input-group">
+                            <span class="input-text-group" id="price-label">$</span>
+                            <input class="form-control" type="text" placeholder="0.00" id="price" aria-label="price" aria-describedby="price-label" name="carray[price]" value="<%= cedit.price %>" required>
+
+                        </div>
+                        <div class="valid-feedback">
+                            Looks Good!
+                        </div>
+                        
+                    </div>
+    
+                    <div class = 'mb-3'>
+                        <label class="form-label" for="description">Description:</label>
+                        <textarea class="form-control" type="text" id="description" name="carray[description]" required><%= cedit.description %> </textarea>
+                        <div class="valid-feedback">
+                            Looks Good!
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-file custom-file">
+                          <input type="file" class="form-file-input" id="image" name="image" multiple>
+                                 <label class="form-file-label" for="image">
+                                     <span class="form-file-text custom-file-label" >Add more image(s)...</span>
+                                     <span class="form-file-button" >Browse</span>
+                                  </label>
+                         </div>
+                       </div>
+
+                       <div class="mb-3">
+                        <% cedit.images.forEach(function(img, i){ %> 
+                            <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
+                            <div class="form-check-inline">
+                                <input type="checkbox" id="image<%=i%>" name="deleteImages[]" value="<%=img.filename %>">
+                            </div>
+                            <label for="image<%= i %> ">Delete?</label>
+                            <% }) %> 
+                    </div>
+    
+            
+                    <br>
+            <div class="mb-3">
+                <button class="btn btn-info">Update campground</button>
+            </div>
+                   
+                </form>
+                <br>
+                <a href="/campground">Cancel</a>
+    
+        </div>
+    </div>
+
